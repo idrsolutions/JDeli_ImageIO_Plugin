@@ -1,0 +1,13 @@
+com.idrsolutions.BMPImageReaderSpi
+com.idrsolutions.DICOMImageReaderSpi
+com.idrsolutions.EMFImageReaderSpi
+com.idrsolutions.GIFImageReaderSpi
+com.idrsolutions.HEICImageReaderSpi
+com.idrsolutions.JPEG2000ImageReaderSpi
+com.idrsolutions.JPEGImageReaderSpi
+com.idrsolutions.PNGImageReaderSpi
+com.idrsolutions.PSDImageReaderSpi
+com.idrsolutions.SGIImageReaderSpi
+com.idrsolutions.TIFFImageReaderSpi
+com.idrsolutions.WEBPImageReaderSpi
+com.idrsolutions.WMFImageReaderSpi
