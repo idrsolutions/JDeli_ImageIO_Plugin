@@ -4,11 +4,12 @@
 # Log file
 *.log
 
-# BlueJ files
-*.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+/*.iml
+/.idea/
+/target/
+/nbactions*.xml
+/dependency-reduced-pom.xml
+/nbproject/
 
 # Package Files #
 *.jar

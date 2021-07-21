@@ -1,0 +1,8 @@
+com.idrsolutions.HEICImageWriterSpi
+com.idrsolutions.BMPImageWriterSpi
+com.idrsolutions.PNGImageWriterSpi
+com.idrsolutions.JPEGImageWriterSpi
+com.idrsolutions.JPEG2000ImageWriterSpi
+com.idrsolutions.PDFImageWriterSpi
+com.idrsolutions.TIFFImageWriterSpi
+com.idrsolutions.WEBPImageWriterSpi
