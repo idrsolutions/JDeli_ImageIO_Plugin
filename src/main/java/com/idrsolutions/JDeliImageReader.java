@@ -116,7 +116,7 @@ public class JDeliImageReader extends ImageReader {
      */
     @Override
     public int getWidth(final int imageIndex) throws IOException {
-        final int w; int w;
+        int w;
         if (delegate == null) {
             try {
                 readMetadata();
@@ -170,7 +170,7 @@ public class JDeliImageReader extends ImageReader {
      */
     @Override
     public int getHeight(final int imageIndex) throws IOException {
-        final int h;
+        int h;
         if (delegate == null) {
             try {
                 readMetadata();
