@@ -7,6 +7,7 @@ import com.idrsolutions.image.JDeli;
 import com.idrsolutions.image.encoder.OutputFormat;
 import com.idrsolutions.image.heic.HeicDecoder;
 
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -125,6 +126,37 @@ public class JDeliImageReader extends ImageReader {
                 w = 0;
             }
         } else {
+            getByteArray();
+            switch (format) {
+                case "heic":
+                    HeicDecoder decoder = new HeicDecoder();
+                    Exif exif = null;
+                    try {
+                        exif = decoder.readExif(bytes);
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    if (exif != null && !exif.getIfdDataList().isEmpty()) {
+                        IFDData data = exif.getIfdDataList().get(0);
+                        w = data.imageWidth;
+                        if (w > 0) {
+                            return w;
+                        }
+                    }
+
+                    try {
+                        Rectangle rectangle = decoder.readDimension(bytes);
+                        w = rectangle.width;
+                        if (w > 0) {
+                            return w;
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
+            }
             w = delegate.getWidth(imageIndex);
         }
         return w;
@@ -149,6 +181,37 @@ public class JDeliImageReader extends ImageReader {
                 h = 0;
             }
         } else {
+            getByteArray();
+            switch (format) {
+                case "heic":
+                    HeicDecoder decoder = new HeicDecoder();
+                    Exif exif = null;
+                    try {
+                        exif = decoder.readExif(bytes);
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    if (exif != null && !exif.getIfdDataList().isEmpty()) {
+                        IFDData data = exif.getIfdDataList().get(0);
+                        h = data.imageHeight;
+                        if (h > 0) {
+                            return h;
+                        }
+                    }
+
+                    try {
+                        Rectangle rectangle = decoder.readDimension(bytes);
+                        h = rectangle.height;
+                        if (h > 0) {
+                            return h;
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
+            }
             h = delegate.getHeight(imageIndex);
         }
         return h;
