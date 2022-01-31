@@ -23,6 +23,8 @@ import javax.imageio.spi.ImageReaderSpi;
 import javax.imageio.stream.FileImageInputStream;
 import javax.imageio.stream.ImageInputStream;
 
+import com.idrsolutions.image.heic.options.HeicMetadata;
+import com.idrsolutions.image.metadata.Exif;
 import org.jpedal.utils.FastByteArrayOutputStream;
 import org.jpedal.utils.LogWriter;
 
@@ -113,14 +115,15 @@ public class JDeliImageReader extends ImageReader {
      */
     @Override
     public int getWidth(final int imageIndex) throws IOException {
-        final int w;
+        int w;
         if (delegate == null) {
+            getByteArray();
             try {
-                readMetadata();
-            } catch (final Exception ex) {
-                ex.getStackTrace();
+                w = JDeli.readDimension(bytes).width;
+            } catch (Exception e) {
+                e.printStackTrace();
+                w = 0;
             }
-            w = metadata.getWidth();
         } else {
             w = delegate.getWidth(imageIndex);
         }
@@ -136,14 +139,15 @@ public class JDeliImageReader extends ImageReader {
      */
     @Override
     public int getHeight(final int imageIndex) throws IOException {
-        final int h;
+        int h;
         if (delegate == null) {
+            getByteArray();
             try {
-                readMetadata();
-            } catch (final Exception ex) {
-                ex.getStackTrace();
+                h = JDeli.readDimension(bytes).height;
+            } catch (Exception e) {
+                e.printStackTrace();
+                h = 0;
             }
-            h = metadata.getHeight();
         } else {
             h = delegate.getHeight(imageIndex);
         }
@@ -182,12 +186,16 @@ public class JDeliImageReader extends ImageReader {
 
     @Override
     public int getNumThumbnails(final int imageIndex) {
-        if (currentThumbnailIndex != -1) {
-
-            return 1;
-        } else {
-            return 0;
+        getByteArray();
+        try {
+            Exif exif = ((HeicMetadata)JDeli.getImageInfo(bytes)).getExif();
+            if (exif != null) {
+                return exif.getIfdImages().size();
+            }
+        } catch (final Exception ex) {
+            ex.getStackTrace();
         }
+        return 0;
     }
 
     public void readMetadata() throws Exception {
@@ -254,13 +262,17 @@ public class JDeliImageReader extends ImageReader {
         } else if (currentThumbnailIndex != thumbnailIndex && currentImageIndex != imageIndex && tn == null) {
             currentThumbnailIndex = thumbnailIndex;
             getByteArray();
-            final HeicDecoder decoder = new HeicDecoder();
             try {
-                tn = decoder.readThumbnail(bytes);
-            } catch (final Exception ex) {
-                ex.getStackTrace();
+                tn = JDeli.readEmbeddedThumbnail(bytes);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
         return tn;
+    }
+
+    @Override
+    public boolean readerSupportsThumbnails() {
+        return format.equals("heic");
     }
 }
