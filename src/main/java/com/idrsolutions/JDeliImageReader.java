@@ -6,7 +6,7 @@ package com.idrsolutions;
 import com.idrsolutions.image.JDeli;
 import com.idrsolutions.image.encoder.OutputFormat;
 
-import java.awt.*;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
