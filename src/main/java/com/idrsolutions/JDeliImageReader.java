@@ -5,8 +5,8 @@ package com.idrsolutions;
 
 import com.idrsolutions.image.JDeli;
 import com.idrsolutions.image.encoder.OutputFormat;
-import com.idrsolutions.image.heic.HeicDecoder;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -119,7 +119,12 @@ public class JDeliImageReader extends ImageReader {
         if (delegate == null) {
             getByteArray();
             try {
-                w = JDeli.readDimension(bytes).width;
+                Rectangle rectangle = JDeli.readDimension(bytes);
+                if (rectangle != null) {
+                    w = rectangle.width;
+                } else {
+                    w = 0;
+                }
             } catch (Exception e) {
                 e.printStackTrace();
                 w = 0;
@@ -143,7 +148,12 @@ public class JDeliImageReader extends ImageReader {
         if (delegate == null) {
             getByteArray();
             try {
-                h = JDeli.readDimension(bytes).height;
+                Rectangle rectangle = JDeli.readDimension(bytes);
+                if (rectangle != null) {
+                    h = rectangle.height;
+                } else {
+                    h = 0;
+                }
             } catch (Exception e) {
                 e.printStackTrace();
                 h = 0;
@@ -257,7 +267,7 @@ public class JDeliImageReader extends ImageReader {
      */
     @Override
     public BufferedImage readThumbnail(final int imageIndex, final int thumbnailIndex) throws IOException {
-        if (!format.equalsIgnoreCase(OutputFormat.HEIC.name())) {
+        if (!format.equalsIgnoreCase(OutputFormat.HEIC.name()) && !format.equalsIgnoreCase(OutputFormat.JPEG.name())) {
             tn = delegate.readThumbnail(imageIndex, thumbnailIndex);
         } else if (currentThumbnailIndex != thumbnailIndex && currentImageIndex != imageIndex && tn == null) {
             currentThumbnailIndex = thumbnailIndex;
@@ -273,6 +283,6 @@ public class JDeliImageReader extends ImageReader {
 
     @Override
     public boolean readerSupportsThumbnails() {
-        return format.equals("heic");
+        return format.equals("heic") || format.equals("jpeg");
     }
 }
