@@ -115,19 +115,16 @@ public class JDeliImageReader extends ImageReader {
      */
     @Override
     public int getWidth(final int imageIndex) throws IOException {
-        int w;
+        int w = 0;
         if (delegate == null) {
             getByteArray();
             try {
                 Rectangle rectangle = JDeli.readDimension(bytes);
                 if (rectangle != null) {
                     w = rectangle.width;
-                } else {
-                    w = 0;
                 }
             } catch (Exception e) {
-                e.printStackTrace();
-                w = 0;
+                throw new IOException(e);
             }
         } else {
             w = delegate.getWidth(imageIndex);
@@ -144,19 +141,16 @@ public class JDeliImageReader extends ImageReader {
      */
     @Override
     public int getHeight(final int imageIndex) throws IOException {
-        int h;
+        int h = 0;
         if (delegate == null) {
             getByteArray();
             try {
                 Rectangle rectangle = JDeli.readDimension(bytes);
                 if (rectangle != null) {
                     h = rectangle.height;
-                } else {
-                    h = 0;
                 }
             } catch (Exception e) {
-                e.printStackTrace();
-                h = 0;
+                throw new IOException(e);
             }
         } else {
             h = delegate.getHeight(imageIndex);
@@ -195,7 +189,7 @@ public class JDeliImageReader extends ImageReader {
     }
 
     @Override
-    public int getNumThumbnails(final int imageIndex) {
+    public int getNumThumbnails(final int imageIndex) throws IOException{
         getByteArray();
         try {
             Exif exif = ((HeicMetadata)JDeli.getImageInfo(bytes)).getExif();
@@ -203,7 +197,7 @@ public class JDeliImageReader extends ImageReader {
                 return exif.getIfdImages().size();
             }
         } catch (final Exception ex) {
-            ex.getStackTrace();
+            throw new IOException(ex);
         }
         return 0;
     }
@@ -252,7 +246,7 @@ public class JDeliImageReader extends ImageReader {
                 bytes = ba.toByteArray();
                 stream.seek(0);
             } catch (final IOException ex) {
-                ex.getStackTrace();
+                LogWriter.writeLog("Failed to create output stream: " + ex.getMessage());
             }
         }
     }
@@ -275,7 +269,7 @@ public class JDeliImageReader extends ImageReader {
             try {
                 tn = JDeli.readEmbeddedThumbnail(bytes);
             } catch (Exception e) {
-                e.printStackTrace();
+                throw new IOException(e);
             }
         }
         return tn;
