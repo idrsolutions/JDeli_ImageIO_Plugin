@@ -6,8 +6,9 @@ package com.idrsolutions;
 
 import com.idrsolutions.image.ImageFormat;
 import com.idrsolutions.image.JDeli;
-import com.idrsolutions.image.metadata.Metadata;
 import javax.imageio.metadata.IIOMetadata;
+
+import com.idrsolutions.image.metadata.Metadata;
 import org.w3c.dom.Node;
 
 @SuppressWarnings("WeakerAccess")
