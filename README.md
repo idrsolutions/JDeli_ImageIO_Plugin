@@ -11,6 +11,26 @@ This is a plugin to extend ImageIO with JDeli. You will require JDeli to use thi
 
 This can be done by copying the repository, or the build jar to your class path.
 
+**Using Maven**
+
+First setup JDeli as guided on our [support page](https://support.idrsolutions.com/jdeli/tutorials/add-jdeli-as-a-maven-dependency)
+
+Now add this plugin into your pom as a dependency. 
+
+    <dependancies>
+        <dependency>
+            <groupId>com.idrsolutions</groupId>
+            <artifactId>jdeli</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.idrsolutions</groupId>
+            <artifactId>JDeli_ImageIO_Plugin</artifactId>
+            <version>1.0</version>
+        </dependency>
+    </dependencies>
+
+
 
 #Who do I talk to?
 
