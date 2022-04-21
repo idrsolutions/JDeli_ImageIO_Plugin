@@ -27,7 +27,7 @@ public class JDeliImageWriteParam extends ImageWriteParam {
     public JDeliImageWriteParam(final Locale locale, final OutputFormat format) {
         this.locale = locale;
         this.format = format;
-        compressionTypes = new String[]{"none", "QUANTISED8BIT", "ZLIB_BETTER_COMPRESSION", "ZLIB_BETTER_SPEED", "DEFLATE", "DEFLATE_BETTER_COMPRESSION", "DEFLATE_BETTER_SPEED", "JPEG"};
+        compressionTypes = new String[]{"none", "QUANTISED8BIT", "ZLIB_BETTER_COMPRESSION", "ZLIB_BETTER_SPEED", "DEFLATE", "DEFLATE_BETTER_COMPRESSION", "DEFLATE_BETTER_SPEED", "JPEG", "LOSSLESS", "LOSSY"};
         formats = new String[]{"JPEG", "JPG", "JPX", "JP2", "JPEG2000", "PNG", "TIFF", "WEBP"};// This is what we have currently compressible through ImageIO
     }
 
