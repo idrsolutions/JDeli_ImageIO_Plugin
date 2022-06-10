@@ -20,11 +20,6 @@ Now add this plugin into your pom as a dependency.
     <dependancies>
         <dependency>
             <groupId>com.idrsolutions</groupId>
-            <artifactId>jdeli</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.idrsolutions</groupId>
             <artifactId>JDeli_ImageIO_Plugin</artifactId>
             <version>1.0</version>
         </dependency>
