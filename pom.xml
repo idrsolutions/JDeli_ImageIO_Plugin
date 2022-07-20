@@ -44,7 +44,23 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
-                            <minimizeJar>true</minimizeJar>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <manifestEntries>
+                                        <author>IDRsolutions</author>
+                                        <copyright>IDRsolutions ltd</copyright>
+                                        <Build-Number>${version}</Build-Number>
+                                        <Built-By>IDRsolutions</Built-By>
+                                        <Product>JDeli_ImageIO_Plugin</Product>
+                                        <Main-Class>com.idrsolutions.image.CommandLine</Main-Class>
+                                        <Implementation-Version>${version}</Implementation-Version>
+                                        <Trusted-Library>true</Trusted-Library>
+                                        <!-- multi-jar enabled in Java9 and later -->
+                                        <Multi-Release>true</Multi-Release>
+                                        <!-- -->
+                                    </manifestEntries>
+                                </transformer>
+                            </transformers>
                         </configuration>
                     </execution>
                 </executions>
