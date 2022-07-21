@@ -12,8 +12,8 @@
     <dependencies>
     <dependency>
         <groupId>com.idrsolutions</groupId>
-        <artifactId>jdeli</artifactId>
-        <version>1.0</version>
+        <artifactId>${depArtifact}</artifactId>
+        <version>${depVersion}</version>
     </dependency>
 </dependencies>
     <build>
@@ -49,15 +49,12 @@
                                     <manifestEntries>
                                         <author>IDRsolutions</author>
                                         <copyright>IDRsolutions ltd</copyright>
-                                        <Build-Number>${version}</Build-Number>
+                                        <Build-Number>${project.version}</Build-Number>
                                         <Built-By>IDRsolutions</Built-By>
-                                        <Product>JDeli_ImageIO_Plugin</Product>
+                                        <Product>jdeli-imageio</Product>
                                         <Main-Class>com.idrsolutions.image.CommandLine</Main-Class>
-                                        <Implementation-Version>${version}</Implementation-Version>
+                                        <Implementation-Version>${project.version}</Implementation-Version>
                                         <Trusted-Library>true</Trusted-Library>
-                                        <!-- multi-jar enabled in Java9 and later -->
-                                        <Multi-Release>true</Multi-Release>
-                                        <!-- -->
                                     </manifestEntries>
                                 </transformer>
                             </transformers>
@@ -66,10 +63,13 @@
                 </executions>
             </plugin>
         </plugins>
-</build>
-
+        <finalName>${finalName}-${project.version}</finalName>
+    </build>
 
     <properties>
+        <finalName>${project.artifactId}</finalName>
+        <depVersion>1.0</depVersion>
+        <depArtifact>jdeli</depArtifact>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
