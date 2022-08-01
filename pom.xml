@@ -12,11 +12,18 @@
     <dependencies>
     <dependency>
         <groupId>com.idrsolutions</groupId>
-        <artifactId>jdeli</artifactId>
-        <version>1.0</version>
+        <artifactId>${depArtifact}</artifactId>
+        <version>${depVersion}</version>
     </dependency>
 </dependencies>
     <build>
+        <extensions>
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-ssh-external</artifactId>
+                <version>3.4.3</version>
+            </extension>
+        </extensions>
         <plugins>
         <plugin>
             <groupId>org.apache.maven.plugins</groupId>
@@ -44,16 +51,32 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
-                            <minimizeJar>true</minimizeJar>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <manifestEntries>
+                                        <author>IDRsolutions</author>
+                                        <copyright>IDRsolutions ltd</copyright>
+                                        <Build-Number>${project.version}</Build-Number>
+                                        <Built-By>IDRsolutions</Built-By>
+                                        <Product>jdeli-imageio</Product>
+                                        <Main-Class>com.idrsolutions.image.CommandLine</Main-Class>
+                                        <Implementation-Version>${project.version}</Implementation-Version>
+                                        <Trusted-Library>true</Trusted-Library>
+                                    </manifestEntries>
+                                </transformer>
+                            </transformers>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
         </plugins>
-</build>
-
+        <finalName>${finalName}-${project.version}</finalName>
+    </build>
 
     <properties>
+        <finalName>${project.artifactId}</finalName>
+        <depVersion>2022.07</depVersion>
+        <depArtifact>jdeli</depArtifact>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
