@@ -3,6 +3,8 @@
  */
 package com.idrsolutions;
 
+import com.idrsolutions.image.ImageIOSupport;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -14,7 +16,7 @@ import javax.imageio.spi.ServiceRegistry;
 import javax.imageio.stream.ImageInputStream;
 
 @SuppressWarnings("WeakerAccess")
-public class JDeliImageReaderSpi extends ImageReaderSpi {
+public abstract class JDeliImageReaderSpi extends ImageReaderSpi {
 
     private static final String vendorName = "IDRSolutions";
     private static final String version = "1.0";
@@ -82,15 +84,24 @@ public class JDeliImageReaderSpi extends ImageReaderSpi {
     @SuppressWarnings("all")
     @Override
     public void onRegistration(final ServiceRegistry registry, final Class<?> category) {
-       Iterator i = registry.getServiceProviders(category, true);
-        while (i.hasNext()) {
-            final ImageReaderSpi provider = (ImageReaderSpi) i.next();
-            if (provider != this && provider.getFormatNames()[0].equalsIgnoreCase(this.getFormatNames()[0])) {
-                delegate = provider;
-                break;
-            } else {
-                delegate = null;
+        isRegistered();
+        Iterator i = registry.getServiceProviders(category, true);
+        if (isRegistered()) {
+            while (i.hasNext()) {
+                final ImageReaderSpi provider = (ImageReaderSpi) i.next();
+                if (provider != this && provider.getFormatNames()[0].equalsIgnoreCase(this.getFormatNames()[0])) {
+                    delegate = provider;
+                    break;
+                } else {
+                    delegate = null;
+                }
             }
+        } else {
+            registry.deregisterServiceProvider(registry.getServiceProviderByClass(this.getClass()));
         }
+    }
+
+    protected boolean isRegistered() {
+        return ImageIOSupport.isregisteredReader(ImageIOSupport.InputFormat.valueOf(names[0]));
     }
 }
