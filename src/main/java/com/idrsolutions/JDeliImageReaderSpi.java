@@ -84,7 +84,6 @@ public abstract class JDeliImageReaderSpi extends ImageReaderSpi {
     @SuppressWarnings("all")
     @Override
     public void onRegistration(final ServiceRegistry registry, final Class<?> category) {
-        isRegistered();
         Iterator i = registry.getServiceProviders(category, true);
         if (isRegistered()) {
             while (i.hasNext()) {
