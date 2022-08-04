@@ -3,6 +3,7 @@
  */
 package com.idrsolutions;
 
+import com.idrsolutions.image.ImageIOSupport;
 import com.idrsolutions.image.encoder.OutputFormat;
 import java.io.IOException;
 import java.util.Iterator;
@@ -78,13 +79,21 @@ public class JDeliImageWriterSpi extends ImageWriterSpi {
       @SuppressWarnings("all")
     @Override
     public void onRegistration(final ServiceRegistry registry, final Class<?> category) {
-        final Iterator i = registry.getServiceProviders(category, true);
-        while (i.hasNext()) {
-            final ImageWriterSpi provider = (ImageWriterSpi) i.next();
-            if (provider != this) {
-                registry.setOrdering(ImageWriterSpi.class, this, provider);
+        if (isRegistered()) {
+            final Iterator i = registry.getServiceProviders(category, true);
+            while (i.hasNext()) {
+                final ImageWriterSpi provider = (ImageWriterSpi) i.next();
+                if (provider != this) {
+                    registry.setOrdering(ImageWriterSpi.class, this, provider);
 
+                }
             }
+        } else {
+            registry.deregisterServiceProvider(registry.getServiceProviderByClass(this.getClass()));
         }
+    }
+
+    protected boolean isRegistered() {
+        return ImageIOSupport.isregisteredWriter(OutputFormat.valueOf(suffixes[0].toUpperCase()));
     }
 }

@@ -13,7 +13,7 @@ import javax.imageio.stream.ImageInputStream;
 
 public class WEBPImageReaderSpi extends JDeliImageReaderSpi {
 
-    private static final String[] names = {"webp"};
+    private static final String[] names = {"WEBP"};
     private static final String[] suffixes = {"webp"};
     private static final String[] MIMETypes = {"image/webp"};
 
