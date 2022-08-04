@@ -1,7 +1,9 @@
 package com.idrsolutions;
 
 import com.idrsolutions.image.ImageFormat;
+import com.idrsolutions.image.ImageIOSupport;
 import com.idrsolutions.image.ImageTypeFinder;
+
 
 import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
@@ -38,5 +40,11 @@ public class DICOMImageReaderSpi extends JDeliImageReaderSpi {
     @Override
     public ImageReader createReaderInstance() throws IOException {
         return createReaderInstance("dcm");
+    }
+
+    @Override
+    protected boolean isRegistered() {
+        return ImageIOSupport.isregisteredReader(ImageIOSupport.InputFormat.valueOf(suffixes[0].toUpperCase()));
+
     }
 }

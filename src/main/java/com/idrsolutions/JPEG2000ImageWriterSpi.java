@@ -3,6 +3,7 @@
  */
 package com.idrsolutions;
 
+import com.idrsolutions.image.ImageIOSupport;
 import com.idrsolutions.image.encoder.OutputFormat;
 
 import java.io.IOException;
@@ -41,4 +42,8 @@ public class JPEG2000ImageWriterSpi extends JDeliImageWriterSpi {
         return super.createWriterInstance(OutputFormat.JPEG2000);
     }
 
+    @Override
+    protected boolean isRegistered() {
+        return ImageIOSupport.isregisteredWriter(OutputFormat.valueOf(names[0]));
+    }
 }
