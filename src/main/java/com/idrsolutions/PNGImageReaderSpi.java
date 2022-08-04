@@ -5,7 +5,7 @@
 package com.idrsolutions;
 
 import com.idrsolutions.image.ImageFormat;
-import com.idrsolutions.image.utility.ImageTypeFinder;
+import com.idrsolutions.image.ImageTypeFinder;
 
 import java.io.IOException;
 import java.util.Locale;

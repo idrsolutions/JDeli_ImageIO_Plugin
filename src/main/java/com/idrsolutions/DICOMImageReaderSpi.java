@@ -2,7 +2,8 @@ package com.idrsolutions;
 
 import com.idrsolutions.image.ImageFormat;
 import com.idrsolutions.image.ImageIOSupport;
-import com.idrsolutions.image.utility.ImageTypeFinder;
+import com.idrsolutions.image.ImageTypeFinder;
+
 
 import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
