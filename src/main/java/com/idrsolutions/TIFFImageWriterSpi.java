@@ -3,7 +3,7 @@
  */
 package com.idrsolutions;
 
-import com.idrsolutions.image.ImageIOSupport;
+import com.idrsolutions.imageio.ImageIOSupport;
 import com.idrsolutions.image.encoder.OutputFormat;
 
 import java.io.IOException;
