@@ -74,7 +74,7 @@
 
     <properties>
         <finalName>${project.artifactId}</finalName>
-        <depVersion>2022.07</depVersion>
+        <depVersion>2022.08</depVersion>
         <depArtifact>jdeli</depArtifact>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
