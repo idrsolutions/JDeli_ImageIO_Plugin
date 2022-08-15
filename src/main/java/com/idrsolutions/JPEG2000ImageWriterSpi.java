@@ -34,7 +34,11 @@ public class JPEG2000ImageWriterSpi extends JDeliImageWriterSpi {
 
     @Override
     public String[] getFormatNames() {
-        return suffixes;
+        if(isRegistered()) {
+            return suffixes;
+        } else {
+            return new String[0];
+        }
     }
 
     @Override

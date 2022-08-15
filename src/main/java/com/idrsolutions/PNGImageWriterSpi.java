@@ -32,11 +32,6 @@ public class PNGImageWriterSpi extends JDeliImageWriterSpi {
     }
 
     @Override
-    public String[] getFormatNames() {
-        return suffixes;
-    }
-
-    @Override
     public ImageWriter createWriterInstance(final Object extension) throws IOException {
         return super.createWriterInstance(OutputFormat.PNG);
     }

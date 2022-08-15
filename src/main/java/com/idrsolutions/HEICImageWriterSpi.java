@@ -11,7 +11,7 @@ import javax.imageio.ImageWriter;
 
 public class HEICImageWriterSpi extends JDeliImageWriterSpi {
 
-    private static final String[] names = {"High Efficiency Image Format"};
+    private static final String[] names = {"HEIC"};
     private static final String[] suffixes = {"heic", "heif"};
     private static final String[] MIMETypes = {"image/heic"};
 
@@ -28,11 +28,6 @@ public class HEICImageWriterSpi extends JDeliImageWriterSpi {
     @Override
     public String getDescription(final Locale locale) {
         return "HEIC Image Writer";
-    }
-
-    @Override
-    public String[] getFormatNames() {
-        return suffixes;
     }
 
     @Override
