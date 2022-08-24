@@ -5,7 +5,7 @@
 
     <groupId>com.idrsolutions</groupId>
     <artifactId>JDeli_ImageIO_Plugin</artifactId>
-    <version>1.0</version>
+    <version>2.0</version>
     <packaging>jar</packaging>
 
     <dependencies>
