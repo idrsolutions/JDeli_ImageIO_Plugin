@@ -48,6 +48,19 @@ ImageIOSupport.registerReader(InputFormat.BMP);
 ImageIOSupport.registerWriter(OutputFormat.BMP);
 ```
 
+To unregister all formats:
+```java
+ImageIOSupport.unregisterReaders(InputFormat.values());
+
+ImageIOSupport.unregisterWriters(OutputFormat.values());
+```
+
+Unregister a single format:
+```java
+ImageIOSupport.unregisterReader(InputFormat.BMP);
+
+ImageIOSupport.unregisterWriter(OutputFormat.BMP);
+```
 
 #Who do I talk to?
 
