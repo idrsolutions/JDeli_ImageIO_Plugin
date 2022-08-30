@@ -13,7 +13,7 @@ import java.util.Locale;
 
 public class BMPImageReaderSpi extends JDeliImageReaderSpi {
 
-    private static final String[] names = {"BMP"};
+    private static final String[] names = {"bmp", "BMP"};
     private static final String[] suffixes = {"bmp"};
     private static final String[] MIMETypes = {"image/bmp"};
 
@@ -29,12 +29,15 @@ public class BMPImageReaderSpi extends JDeliImageReaderSpi {
 
     @Override
     public boolean canDecodeInput(final Object source) throws IOException {
+        if(isRegistered()) {
+            final ImageInputStream input = (ImageInputStream) source;
+            final byte[] b = new byte[140];
+            input.read(b);
 
-        final ImageInputStream input = (ImageInputStream) source;
-        final byte[] b = new byte[140];
-        input.read(b);
-
-        return ImageTypeFinder.getImageType(b).equals(ImageFormat.BMP_IMAGE);
+            return ImageTypeFinder.getImageType(b).equals(ImageFormat.BMP_IMAGE);
+        } else {
+            return false;
+        }
 
     }
 

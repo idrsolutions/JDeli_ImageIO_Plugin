@@ -11,7 +11,7 @@ import javax.imageio.ImageWriter;
 
 public class BMPImageWriterSpi extends JDeliImageWriterSpi {
 
-    private static final String[] names = {"Bitmap Graphics"};
+    private static final String[] names = {"BMP"};
     private static final String[] suffixes = {"bmp"};
     private static final String[] MIMETypes = {"image/bmp"};
 
@@ -28,11 +28,6 @@ public class BMPImageWriterSpi extends JDeliImageWriterSpi {
     @Override
     public String getDescription(final Locale locale) {
         return "BMP Image Writer";
-    }
-
-    @Override
-    public String[] getFormatNames() {
-        return suffixes;
     }
 
     @Override

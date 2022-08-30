@@ -13,7 +13,7 @@ import javax.imageio.stream.ImageInputStream;
 
 public class TIFFImageReaderSpi extends JDeliImageReaderSpi {
 
-    private static final String[] names = {"TIF", "TIFF"};
+    private static final String[] names = {"tif", "TIF", "tiff", "TIFF"};
     private static final String[] suffixes = {"tif", "tiff"};
     private static final String[] MIMETypes = {"image/tiff"};
 
@@ -33,13 +33,15 @@ public class TIFFImageReaderSpi extends JDeliImageReaderSpi {
 
     @Override
     public boolean canDecodeInput(final Object source) throws IOException {
+        if(isRegistered()) {
+            final ImageInputStream input = (ImageInputStream) source;
+            final byte[] b = new byte[140];
+            input.read(b);
 
-        final ImageInputStream input = (ImageInputStream) source;
-        final byte[] b = new byte[140];
-        input.read(b);
-
-        return ImageTypeFinder.getImageType(b).equals(ImageFormat.TIFF_IMAGE);
-
+            return ImageTypeFinder.getImageType(b).equals(ImageFormat.TIFF_IMAGE);
+        } else {
+            return false;
+        }
     }
 
     @Override

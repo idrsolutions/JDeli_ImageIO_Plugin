@@ -10,7 +10,7 @@ import java.util.Locale;
 
 public class GIFImageReaderSpi extends JDeliImageReaderSpi {
 
-    private static final String[] names = {"GIF"};
+    private static final String[] names = { "gif", "GIF" };
     private static final String[] suffixes = {"gif"};
     private static final String[] MIMETypes = {"image/gif"};
 
@@ -26,13 +26,15 @@ public class GIFImageReaderSpi extends JDeliImageReaderSpi {
 
     @Override
     public boolean canDecodeInput(final Object source) throws IOException {
+        if(isRegistered()) {
+            final ImageInputStream input = (ImageInputStream) source;
+            final byte[] b = new byte[140];
+            input.read(b);
 
-        final ImageInputStream input = (ImageInputStream) source;
-        final byte[] b = new byte[140];
-        input.read(b);
-
-        return ImageTypeFinder.getImageType(b).equals(ImageFormat.GIF_IMAGE);
-
+            return ImageTypeFinder.getImageType(b).equals(ImageFormat.GIF_IMAGE);
+        } else {
+            return false;
+        }
     }
 
     @Override

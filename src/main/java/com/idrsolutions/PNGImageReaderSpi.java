@@ -14,7 +14,7 @@ import javax.imageio.stream.ImageInputStream;
 
 public class PNGImageReaderSpi extends JDeliImageReaderSpi {
 
-    private static final String[] names = {"PNG"};
+    private static final String[] names = {"png", "PNG"};
     private static final String[] suffixes = {"png"};
     private static final String[] MIMETypes = {"image/png"};
 
@@ -34,13 +34,15 @@ public class PNGImageReaderSpi extends JDeliImageReaderSpi {
 
     @Override
     public boolean canDecodeInput(final Object source) throws IOException {
+        if(isRegistered()) {
+            final ImageInputStream input = (ImageInputStream) source;
+            final byte[] b = new byte[140];
+            input.read(b);
 
-        final ImageInputStream input = (ImageInputStream) source;
-        final byte[] b = new byte[140];
-        input.read(b);
-
-        return ImageTypeFinder.getImageType(b).equals(ImageFormat.PNG_IMAGE);
-
+            return ImageTypeFinder.getImageType(b).equals(ImageFormat.PNG_IMAGE);
+        } else {
+            return false;
+        }
     }
 
     @Override

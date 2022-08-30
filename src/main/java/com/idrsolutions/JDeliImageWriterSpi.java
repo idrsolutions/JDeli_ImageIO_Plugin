@@ -5,6 +5,8 @@ package com.idrsolutions;
 
 import com.idrsolutions.imageio.ImageIOSupport;
 import com.idrsolutions.image.encoder.OutputFormat;
+
+import java.awt.image.RenderedImage;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.Locale;
@@ -58,8 +60,17 @@ public class JDeliImageWriterSpi extends ImageWriterSpi {
 
     @Override
     public boolean canEncodeImage(final ImageTypeSpecifier imageType) {
-        final int bands = imageType.getNumBands();
-        return bands == 1 || bands == 2 || bands == 3 || bands == 4;
+        if (isRegistered()) {
+            final int bands = imageType.getNumBands();
+            return bands == 1 || bands == 2 || bands == 3 || bands == 4;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public String[] getMIMETypes() {
+        return isRegistered() ? MIMETypes : new String[0];
     }
 
     @Override
@@ -76,7 +87,17 @@ public class JDeliImageWriterSpi extends ImageWriterSpi {
         return new JDeliImageWriter(this, format);
     }
 
-      @SuppressWarnings("all")
+    @Override
+    public String[] getFormatNames() {
+        return isRegistered() ? names : new String[0];
+    }
+
+    @Override
+    public String[] getFileSuffixes() {
+        return isRegistered() ? suffixes : new String[0];
+    }
+
+    @SuppressWarnings("all")
     @Override
     public void onRegistration(final ServiceRegistry registry, final Class<?> category) {
         if (isRegistered()) {

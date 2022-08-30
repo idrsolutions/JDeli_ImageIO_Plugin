@@ -9,7 +9,9 @@ This is a plugin to extend ImageIO with JDeli. You will require JDeli to use thi
 
 ---
 
-This can be done by copying the repository, or the build jar to your class path. We also have a [pre-made combined JDeli and ImageIO jar](https://www.idrsolutions.com/jdeli/trial-download) which contains the latest of both.
+This can be done by copying the repository, or the build jar to your class path. 
+
+We also have a [pre-made combined JDeli and ImageIO jar](https://www.idrsolutions.com/jdeli/trial-download) which contains the latest of both.
 
 **Using Maven**
 
@@ -46,6 +48,19 @@ ImageIOSupport.registerReader(InputFormat.BMP);
 ImageIOSupport.registerWriter(OutputFormat.BMP);
 ```
 
+To unregister all formats:
+```java
+ImageIOSupport.unregisterReaders(InputFormat.values());
+
+ImageIOSupport.unregisterWriters(OutputFormat.values());
+```
+
+Unregister a single format:
+```java
+ImageIOSupport.unregisterReader(InputFormat.BMP);
+
+ImageIOSupport.unregisterWriter(OutputFormat.BMP);
+```
 
 #Who do I talk to?
 
