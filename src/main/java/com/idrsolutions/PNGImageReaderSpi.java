@@ -14,7 +14,7 @@ import javax.imageio.stream.ImageInputStream;
 
 public class PNGImageReaderSpi extends JDeliImageReaderSpi {
 
-    private static final String[] names = {"png", "PNG"};
+    private static final String[] names = {"PNG"};
     private static final String[] suffixes = {"png"};
     private static final String[] MIMETypes = {"image/png"};
 

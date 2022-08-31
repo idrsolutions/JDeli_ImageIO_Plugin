@@ -10,7 +10,7 @@ import java.util.Locale;
 
 public class GIFImageReaderSpi extends JDeliImageReaderSpi {
 
-    private static final String[] names = { "gif", "GIF" };
+    private static final String[] names = {"GIF"};
     private static final String[] suffixes = {"gif"};
     private static final String[] MIMETypes = {"image/gif"};
 
