@@ -13,7 +13,7 @@ import java.util.Locale;
 
 public class BMPImageReaderSpi extends JDeliImageReaderSpi {
 
-    private static final String[] names = {"bmp", "BMP"};
+    private static final String[] names = {"BMP"};
     private static final String[] suffixes = {"bmp"};
     private static final String[] MIMETypes = {"image/bmp"};
 
