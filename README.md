@@ -28,6 +28,39 @@ You can then add this plugin into your pom as a dependency.
     </dependencies>
 
 
+#Registering and unregistering formats for reading and writing
+
+---
+
+By default the plugin now comes with HEIC registered and all other formats JDeli supports are unregistered.
+
+To register all formats:
+```java
+ImageIOSupport.registerReaders(InputFormat.values());
+
+ImageIOSupport.registerWriters(OutputFormat.values());
+```
+
+Register a single format:
+```java
+ImageIOSupport.registerReader(InputFormat.BMP);
+
+ImageIOSupport.registerWriter(OutputFormat.BMP);
+```
+
+To unregister all formats:
+```java
+ImageIOSupport.unregisterReaders(InputFormat.values());
+
+ImageIOSupport.unregisterWriters(OutputFormat.values());
+```
+
+Unregister a single format:
+```java
+ImageIOSupport.unregisterReader(InputFormat.BMP);
+
+ImageIOSupport.unregisterWriter(OutputFormat.BMP);
+```
 
 #Who do I talk to?
 

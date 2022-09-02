@@ -4,7 +4,6 @@
 package com.idrsolutions;
 
 import com.idrsolutions.image.JDeli;
-import com.idrsolutions.image.encoder.OutputFormat;
 
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -22,9 +21,8 @@ import javax.imageio.metadata.IIOMetadata;
 import javax.imageio.spi.ImageReaderSpi;
 import javax.imageio.stream.FileImageInputStream;
 import javax.imageio.stream.ImageInputStream;
-
-import com.idrsolutions.image.heic.options.HeicMetadata;
 import com.idrsolutions.image.metadata.Exif;
+import com.idrsolutions.imageio.ImageIOSupport;
 import org.jpedal.utils.FastByteArrayOutputStream;
 import org.jpedal.utils.LogWriter;
 
@@ -173,6 +171,11 @@ public class JDeliImageReader extends ImageReader {
         return l.iterator();
     }
 
+    /**
+     * Returns the format name
+     *
+     * @return String of format
+     */
     @Override
     public String getFormatName() {
         return format;
@@ -188,13 +191,30 @@ public class JDeliImageReader extends ImageReader {
         return delegate.getImageMetadata(imageIndex);
     }
 
+    /**
+     * Returns the number of thumbnails of the image
+     *
+     *
+     * Note: Currently supported for HEIC and JPEG
+     * @param imageIndex int
+     * @return int of thumbnails
+     */
     @Override
     public int getNumThumbnails(final int imageIndex) throws IOException{
-        getByteArray();
+        if (currentImageIndex != imageIndex) {
+            currentImageIndex = imageIndex;
+        }
         try {
-            Exif exif = ((HeicMetadata)JDeli.getImageInfo(bytes)).getExif();
-            if (exif != null) {
-                return exif.getIfdImages().size();
+            if (bytes == null) {
+              getByteArray();
+            }
+            if (format.equalsIgnoreCase(ImageIOSupport.InputFormat.HEIC.name())) {
+                Exif exif = Exif.readExif(bytes);
+                int size = exif.getIfdImages().size();
+                return size != 0 ? size : 1;
+
+            } else if (format.equalsIgnoreCase(ImageIOSupport.InputFormat.JPEG.name())) {
+                return 1;
             }
         } catch (final Exception ex) {
             throw new IOException(ex);
@@ -252,6 +272,26 @@ public class JDeliImageReader extends ImageReader {
     }
 
     /**
+     * Returns if the image has thumbnails
+     *
+     *
+     * Note: Currently supported for HEIC and JPEG
+     * @param index int
+     * @return boolean
+     */
+    @Override
+    public boolean hasThumbnails(int index) throws IOException {
+        if (currentImageIndex == index && readerSupportsThumbnails()) {
+                try {
+                    return JDeli.readEmbeddedThumbnail(bytes) != null;
+                } catch (Exception e) {
+                    throw new IOException(e);
+                }
+            }
+        return false;
+    }
+
+    /**
      * Read the thumbnail
      *
      * @param imageIndex int
@@ -261,11 +301,13 @@ public class JDeliImageReader extends ImageReader {
      */
     @Override
     public BufferedImage readThumbnail(final int imageIndex, final int thumbnailIndex) throws IOException {
-        if (!format.equalsIgnoreCase(OutputFormat.HEIC.name()) && !format.equalsIgnoreCase(OutputFormat.JPEG.name())) {
+        if (readerSupportsThumbnails()) {
             tn = delegate.readThumbnail(imageIndex, thumbnailIndex);
         } else if (currentThumbnailIndex != thumbnailIndex && currentImageIndex != imageIndex && tn == null) {
             currentThumbnailIndex = thumbnailIndex;
-            getByteArray();
+            if (bytes == null) {
+                getByteArray();
+            }
             try {
                 tn = JDeli.readEmbeddedThumbnail(bytes);
             } catch (Exception e) {
@@ -275,8 +317,15 @@ public class JDeliImageReader extends ImageReader {
         return tn;
     }
 
+    /**
+     * Returns if the reader supports thumbnails
+     *
+     *
+     * Note: Currently supported for HEIC and JPEG
+     * @return int of thumbnails
+     */
     @Override
     public boolean readerSupportsThumbnails() {
-        return format.equals("heic") || format.equals("jpeg");
+        return format.equalsIgnoreCase("heic") || format.equalsIgnoreCase("jpeg") || format.equalsIgnoreCase("jpg");
     }
 }

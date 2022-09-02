@@ -63,6 +63,21 @@ public abstract class JDeliImageReaderSpi extends ImageReaderSpi {
     }
 
     @Override
+    public String[] getFormatNames() {
+        return isRegistered() ? names : new String[0];
+    }
+
+    @Override
+    public String[] getFileSuffixes() {
+        return isRegistered() ? suffixes : new String[0];
+    }
+
+    @Override
+    public String[] getMIMETypes() {
+        return isRegistered() ? MIMETypes : new String[0];
+    }
+
+    @Override
     public String getDescription(final Locale locale) {
         return "JDeli Image Reader";
     }
@@ -101,6 +116,6 @@ public abstract class JDeliImageReaderSpi extends ImageReaderSpi {
     }
 
     protected boolean isRegistered() {
-        return ImageIOSupport.isregisteredReader(ImageIOSupport.InputFormat.valueOf(names[0]));
+        return ImageIOSupport.isregisteredReader(ImageIOSupport.InputFormat.valueOf(names[0].toUpperCase()));
     }
 }
