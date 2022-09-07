@@ -281,7 +281,10 @@ public class JDeliImageReader extends ImageReader {
      */
     @Override
     public boolean hasThumbnails(int index) throws IOException {
-        if (currentImageIndex == index && readerSupportsThumbnails()) {
+        if (currentImageIndex != index) {
+            currentImageIndex = index;
+        }
+        if (readerSupportsThumbnails()) {
                 try {
                     return JDeli.readEmbeddedThumbnail(bytes) != null;
                 } catch (Exception e) {
@@ -301,7 +304,7 @@ public class JDeliImageReader extends ImageReader {
      */
     @Override
     public BufferedImage readThumbnail(final int imageIndex, final int thumbnailIndex) throws IOException {
-        if (readerSupportsThumbnails()) {
+        if (!readerSupportsThumbnails()) {
             tn = delegate.readThumbnail(imageIndex, thumbnailIndex);
         } else if (currentThumbnailIndex != thumbnailIndex && currentImageIndex != imageIndex && tn == null) {
             currentThumbnailIndex = thumbnailIndex;
