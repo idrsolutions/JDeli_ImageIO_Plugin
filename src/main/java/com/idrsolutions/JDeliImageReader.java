@@ -28,7 +28,7 @@ import org.jpedal.utils.LogWriter;
 
 /**
  * This is the image reader for the JDeli ImageIO plug-in and utilises JDeli to
- * read images This class extends ImageReader
+ * read images. This class extends ImageReader
  */
 @SuppressWarnings("WeakerAccess")
 public class JDeliImageReader extends ImageReader {
@@ -285,8 +285,12 @@ public class JDeliImageReader extends ImageReader {
             currentImageIndex = index;
         }
         if (readerSupportsThumbnails()) {
+            if (bytes == null) {
+               getByteArray();
+            }
                 try {
-                    return JDeli.readEmbeddedThumbnail(bytes) != null;
+                    tn = JDeli.readEmbeddedThumbnail(bytes);
+                    return tn != null;
                 } catch (Exception e) {
                     throw new IOException(e);
                 }
@@ -306,15 +310,21 @@ public class JDeliImageReader extends ImageReader {
     public BufferedImage readThumbnail(final int imageIndex, final int thumbnailIndex) throws IOException {
         if (!readerSupportsThumbnails()) {
             tn = delegate.readThumbnail(imageIndex, thumbnailIndex);
-        } else if (currentThumbnailIndex != thumbnailIndex && currentImageIndex != imageIndex && tn == null) {
-            currentThumbnailIndex = thumbnailIndex;
-            if (bytes == null) {
-                getByteArray();
+        } else {
+            if (currentThumbnailIndex != thumbnailIndex || currentImageIndex != imageIndex) {
+                currentThumbnailIndex = thumbnailIndex;
+                currentImageIndex = imageIndex;
+                tn = null;
             }
-            try {
-                tn = JDeli.readEmbeddedThumbnail(bytes);
-            } catch (Exception e) {
-                throw new IOException(e);
+            if (tn == null) {
+                if (bytes == null) {
+                    getByteArray();
+                }
+                try {
+                    tn = JDeli.readEmbeddedThumbnail(bytes);
+                } catch (Exception e) {
+                    throw new IOException(e);
+                }
             }
         }
         return tn;
@@ -325,10 +335,10 @@ public class JDeliImageReader extends ImageReader {
      *
      *
      * Note: Currently supported for HEIC and JPEG
-     * @return int of thumbnails
+     * @return boolean of if thumbnails are supported
      */
     @Override
     public boolean readerSupportsThumbnails() {
-        return format.equalsIgnoreCase("heic") || format.equalsIgnoreCase("jpeg") || format.equalsIgnoreCase("jpg");
+        return format.equalsIgnoreCase("heic") || format.equalsIgnoreCase("heif") || format.equalsIgnoreCase("jpeg") || format.equalsIgnoreCase("jpg");
     }
 }

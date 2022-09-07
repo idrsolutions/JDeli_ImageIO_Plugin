@@ -13,7 +13,7 @@ import javax.imageio.stream.ImageInputStream;
 
 public class HEICImageReaderSpi extends JDeliImageReaderSpi {
 
-    private static final String[] names = {"HEIC"};
+    private static final String[] names = {"HEIC", "HEIF"};
     private static final String[] suffixes = {"heic", "heif"};
     private static final String[] MIMETypes = {"image/heic"};
 
