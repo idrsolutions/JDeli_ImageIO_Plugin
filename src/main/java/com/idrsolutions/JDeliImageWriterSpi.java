@@ -115,6 +115,6 @@ public class JDeliImageWriterSpi extends ImageWriterSpi {
     }
 
     protected boolean isRegistered() {
-        return ImageIOSupport.isregisteredWriter(OutputFormat.valueOf(suffixes[0].toUpperCase()));
+        return ImageIOSupport.isregisteredWriter(OutputFormat.valueOf(suffixes[0].toUpperCase(Locale.ENGLISH)));
     }
 }
