@@ -5,7 +5,7 @@
 This is a plugin to extend ImageIO with JDeli. You will require JDeli to use this plugin, if you don't already have JDeli, you can download the trial [here](https://www.idrsolutions.com/jdeli/).
 
 
-#Installation
+# Installation
 
 ---
 
@@ -28,7 +28,7 @@ You can then add this plugin into your pom as a dependency.
     </dependencies>
 
 
-#Registering and unregistering formats for reading and writing
+# Registering and unregistering formats for reading and writing
 
 ---
 
@@ -62,7 +62,7 @@ ImageIOSupport.unregisterReader(InputFormat.BMP);
 ImageIOSupport.unregisterWriter(OutputFormat.BMP);
 ```
 
-#Who do I talk to?
+# Who do I talk to?
 
 ---
 
