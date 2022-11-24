@@ -46,7 +46,7 @@ public class DICOMImageReaderSpi extends JDeliImageReaderSpi {
 
     @Override
     protected boolean isRegistered() {
-        return ImageIOSupport.isregisteredReader(ImageIOSupport.InputFormat.valueOf(suffixes[0].toUpperCase()));
+        return ImageIOSupport.isregisteredReader(ImageIOSupport.InputFormat.valueOf(suffixes[0].toUpperCase(Locale.ENGLISH)));
 
     }
 }

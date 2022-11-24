@@ -116,6 +116,6 @@ public abstract class JDeliImageReaderSpi extends ImageReaderSpi {
     }
 
     protected boolean isRegistered() {
-        return ImageIOSupport.isregisteredReader(ImageIOSupport.InputFormat.valueOf(names[0].toUpperCase()));
+        return ImageIOSupport.isregisteredReader(ImageIOSupport.InputFormat.valueOf(names[0].toUpperCase(Locale.ENGLISH)));
     }
 }
