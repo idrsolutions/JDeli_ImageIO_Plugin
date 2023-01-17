@@ -19,7 +19,7 @@ First setup JDeli as guided on our [support page](https://support.idrsolutions.c
 Once JDeli has been set up You can build JDeli_imageIO_Plugin and the jar will include JDeli.
 You can then add this plugin into your pom as a dependency. 
 
-    <dependancies>
+    <dependencies>
         <dependency>
             <groupId>com.idrsolutions</groupId>
             <artifactId>JDeli_ImageIO_Plugin</artifactId>
