@@ -4,17 +4,19 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.idrsolutions</groupId>
-    <artifactId>JDeli_ImageIO_Plugin</artifactId>
+    <artifactId>jdeli_imageio${profile.identifier}</artifactId>
     <version>2.0</version>
     <packaging>jar</packaging>
 
     <dependencies>
-    <dependency>
-        <groupId>com.idrsolutions</groupId>
-        <artifactId>${depArtifact}</artifactId>
-        <version>${depVersion}</version>
-    </dependency>
-</dependencies>
+        <!--JDeli Dependency-->
+        <dependency>
+            <groupId>com.idrsolutions</groupId>
+            <artifactId>${depArtifact}</artifactId>
+            <version>${depVersion}</version>
+        </dependency>
+    </dependencies>
+
     <build>
         <extensions>
             <extension>
@@ -74,11 +76,35 @@
 
     <properties>
         <finalName>${project.artifactId}</finalName>
-        <depVersion>2022.08</depVersion>
+        <depVersion>2023.08</depVersion>
         <depArtifact>jdeli</depArtifact>
+
+        <!--An identifier used to change the artifactID for the daily, trial, and trial daily builds-->
+        <!--suppress CheckTagEmptyBody -->
+        <profile.identifier></profile.identifier>
+
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
-    
+    <profiles>
+        <profile>
+            <id>daily</id>
+            <properties>
+                <profile.identifier>-daily</profile.identifier>
+            </properties>
+        </profile>
+        <profile>
+            <id>trial</id>
+            <properties>
+                <profile.identifier>-trial</profile.identifier>
+            </properties>
+        </profile>
+        <profile>
+            <id>trial-daily</id>
+            <properties>
+                <profile.identifier>-trial-daily</profile.identifier>
+            </properties>
+        </profile>
+    </profiles>
 </project>
