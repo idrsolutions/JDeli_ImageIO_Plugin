@@ -19,20 +19,21 @@ First setup JDeli as guided on our [support page](https://support.idrsolutions.c
 Once JDeli has been set up You can build JDeli_imageIO_Plugin and the jar will include JDeli.
 You can then add this plugin into your pom as a dependency. 
 
-    <dependencies>
-        <dependency>
-            <groupId>com.idrsolutions</groupId>
-            <artifactId>JDeli_ImageIO_Plugin</artifactId>
-            <version>1.0</version>
-        </dependency>
-    </dependencies>
-
+```xml
+<dependencies>
+    <dependency>
+        <groupId>com.idrsolutions</groupId>
+        <artifactId>jdeli_imageio</artifactId>
+        <version>1.0</version>
+    </dependency>
+</dependencies>
+```
 
 # Registering and unregistering formats for reading and writing
 
 ---
 
-By default the plugin now comes with HEIC registered and all other formats JDeli supports are unregistered.
+By default, the plugin now comes with HEIC registered and all other formats JDeli supports are unregistered.
 
 To register all formats:
 ```java
@@ -73,7 +74,7 @@ Got questions? You can contact us [here](https://idrsolutions.atlassian.net/serv
 ---
 
 
-Copyright 2021 IDRsolutions
+Copyright 2023 IDRsolutions
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 
