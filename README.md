@@ -23,7 +23,7 @@ You can then add this plugin into your pom as a dependency.
 <dependencies>
     <dependency>
         <groupId>com.idrsolutions</groupId>
-        <artifactId>jdeli_imageio</artifactId>
+        <artifactId>jdeli-imageio</artifactId>
         <version>1.0</version>
     </dependency>
 </dependencies>
