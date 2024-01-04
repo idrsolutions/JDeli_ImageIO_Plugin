@@ -1,0 +1,3 @@
+JDeli ImageIO Plugin
+
+Copyright 2021 - 2024 IDRsolutions
