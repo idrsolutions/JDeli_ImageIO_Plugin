@@ -47,6 +47,11 @@ public class JDeliImageWriter extends ImageWriter {
     }
 
     @Override
+    public boolean canWriteRasters() {
+        return true;
+    }
+
+    @Override
     public IIOMetadata getDefaultStreamMetadata(final ImageWriteParam param) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
