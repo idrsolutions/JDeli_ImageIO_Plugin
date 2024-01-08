@@ -251,6 +251,11 @@ public class JDeliImageReader extends ImageReader {
         return image;
     }
 
+    @Override
+    public boolean canReadRaster() {
+        return true;
+    }
+
     private void getByteArray() {
         if (bytes == null) {
             try {
