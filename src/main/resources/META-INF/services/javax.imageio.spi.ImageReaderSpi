@@ -5,6 +5,7 @@ com.idrsolutions.GIFImageReaderSpi
 com.idrsolutions.HEICImageReaderSpi
 com.idrsolutions.JPEG2000ImageReaderSpi
 com.idrsolutions.JPEGImageReaderSpi
+com.idrsolutions.JPEGXLImageReaderSpi
 com.idrsolutions.PNGImageReaderSpi
 com.idrsolutions.PSDImageReaderSpi
 com.idrsolutions.SGIImageReaderSpi
