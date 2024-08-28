@@ -81,7 +81,7 @@
 
     <properties>
         <finalName>${project.artifactId}</finalName>
-        <depVersion>2023.12</depVersion>
+        <depVersion>2024.07</depVersion>
         <depArtifact>jdeli</depArtifact>
 
         <!--An identifier used to change the artifactID for the daily, trial, and trial daily builds-->
