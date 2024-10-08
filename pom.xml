@@ -75,6 +75,29 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+                <!-- We don't want to deal with module info needing to be compiled in the context of the
+                     packages, so this plugin sorts it for us -->
+                <groupId>org.moditect</groupId>
+                <artifactId>moditect-maven-plugin</artifactId>
+                <version>1.2.2.Final</version>
+                <executions>
+                    <execution>
+                        <id>add-module-info</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>add-module-info</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <overwriteExistingFiles>true</overwriteExistingFiles>
+                    <module>
+                        <moduleInfoFile>src/main/java-modules/module-info.java</moduleInfoFile>
+                    </module>
+                </configuration>
+            </plugin>
         </plugins>
         <finalName>${finalName}-${project.version}</finalName>
     </build>
