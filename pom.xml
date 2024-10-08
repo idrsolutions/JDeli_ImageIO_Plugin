@@ -5,7 +5,7 @@
 
     <groupId>com.idrsolutions</groupId>
     <artifactId>jdeli-imageio${profile.identifier}</artifactId>
-    <version>2.0</version>
+    <version>3.0</version>
     <packaging>jar</packaging>
 
     <dependencies>
@@ -22,34 +22,34 @@
             <extension>
                 <groupId>org.apache.maven.wagon</groupId>
                 <artifactId>wagon-ssh-external</artifactId>
-                <version>2.12</version>
+                <version>3.5.3</version>
             </extension>
         </extensions>
         <plugins>
         <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-compiler-plugin</artifactId>
-            <version>3.8.1</version>
+            <version>3.13.0</version>
         </plugin>
         <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-deploy-plugin</artifactId>
-            <version>2.7</version>
+            <version>3.1.3</version>
         </plugin>
         <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>versions-maven-plugin</artifactId>
-            <version>2.16.0</version>
+            <version>2.17.1</version>
         </plugin>
         <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-jar-plugin</artifactId>
-            <version>3.2.0</version>
+            <version>3.4.2</version>
         </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.2.1</version>
+                <version>3.6.0</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -81,15 +81,13 @@
 
     <properties>
         <finalName>${project.artifactId}</finalName>
-        <depVersion>2024.08</depVersion>
+        <depVersion>2024.10</depVersion>
         <depArtifact>jdeli</depArtifact>
 
         <!--An identifier used to change the artifactID for the daily, trial, and trial daily builds-->
         <!--suppress CheckTagEmptyBody -->
         <profile.identifier></profile.identifier>
-
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.release>17</maven.compiler.release>
     </properties>
 
     <profiles>
