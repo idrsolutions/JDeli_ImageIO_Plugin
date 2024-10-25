@@ -81,7 +81,7 @@
                      packages, so this plugin sorts it for us -->
                 <groupId>org.moditect</groupId>
                 <artifactId>moditect-maven-plugin</artifactId>
-                <version>1.2.2.Final</version>
+                <version>1.2.0.Final</version>
                 <executions>
                     <execution>
                         <id>add-module-info</id>
